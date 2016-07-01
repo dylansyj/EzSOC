@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.alphanese.ezsoc5.MainActivity"
+    android:background="@drawable/test"
+    android:focusableInTouchMode="false"
+    android:forceHasOverlappingRendering="true">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/ezsoc"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search for availability only!"
+        android:id="@+id/AvailButton"
+        android:background="@android:drawable/button_onoff_indicator_off"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Advanced Search"
+        android:id="@+id/AdvButton"
+        android:background="@android:drawable/button_onoff_indicator_off"
+        android:layout_marginTop="72dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:contextClickable="true"
+        android:textStyle="normal|bold" />
+
+    <ImageButton
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:id="@+id/TRimage"
+        android:background="@drawable/tr"
+        android:elevation="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/AdvButton"
+        android:layout_alignEnd="@+id/AdvButton"
+        android:layout_toEndOf="@+id/SRimage"
+        android:layout_alignTop="@+id/SRimage"
+        android:layout_toRightOf="@+id/SRimage" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SRimage"
+        android:background="@drawable/sr"
+        android:elevation="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/textView"
+        android:layout_toStartOf="@+id/textView"
+        android:contextClickable="false"
+        android:cropToPadding="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose:"
+        android:id="@+id/textView"
+        android:layout_below="@+id/AdvButton"
+        android:layout_alignLeft="@+id/AdvButton"
+        android:layout_alignStart="@+id/AdvButton"
+        android:layout_marginTop="67dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DRimage"
+        android:background="@drawable/dr"
+        android:elevation="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/TRimage"
+        android:layout_toEndOf="@+id/TRimage"
+        android:layout_alignTop="@+id/TRimage" />
+    />
+</RelativeLayout>

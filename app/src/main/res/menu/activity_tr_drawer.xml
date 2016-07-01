@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/nav_tr_layout"
+
+            android:title="TR 1" />
+        <item
+            android:id="@+id/nav_tr_layout2"
+
+            android:title="TR 2" />
+        <item
+            android:id="@+id/nav_tr_layout3"
+
+            android:title="TR 3" />
+        <item
+            android:id="@+id/nav_tr_layout4"
+
+            android:title="TR 4" />
+        <item
+            android:id="@+id/nav_tr_layout5"
+
+            android:title="TR 5" />
+        <item
+            android:id="@+id/nav_tr_layout6"
+
+            android:title="TR 6" />
+        <item
+            android:id="@+id/nav_tr_layout7"
+
+            android:title="TR 7" />
+        <item
+            android:id="@+id/nav_tr_layout8"
+
+            android:title="TR 8" />
+        <item
+            android:id="@+id/nav_tr_layout9"
+
+            android:title="TR 9" />
+        <item
+            android:id="@+id/nav_tr_layout10"
+
+            android:title="TR 10" />
+        <item
+            android:id="@+id/nav_tr_layout11"
+
+            android:title="TR 11" />
+        <item
+            android:id="@+id/nav_tr_layout12"
+
+            android:title="TR 12" />
+        <item
+            android:id="@+id/nav_tr_layout13"
+
+            android:title="TR 13" />
+        <item
+            android:id="@+id/nav_tr_layout14"
+
+            android:title="TR 14" />
+        <item
+            android:id="@+id/nav_tr_layout15"
+
+            android:title="TR 15" />
+</menu>

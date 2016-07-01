@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/nav_sr_layout"
+
+            android:title="SR 1" />
+        <item
+            android:id="@+id/nav_sr_layout2"
+
+            android:title="SR 2" />
+        <item
+            android:id="@+id/nav_sr_layout3"
+
+            android:title="SR 3" />
+        <item
+            android:id="@+id/nav_sr_layout4"
+
+            android:title="SR 4" />
+        <item
+            android:id="@+id/nav_sr_layout5"
+
+            android:title="SR 5" />
+        <item
+            android:id="@+id/nav_sr_layout6"
+
+            android:title="SR 6" />
+        <item
+            android:id="@+id/nav_sr_layout7"
+
+            android:title="SR 7" />
+        <item
+            android:id="@+id/nav_sr_layout8"
+
+            android:title="SR 8" />
+        <item
+            android:id="@+id/nav_sr_layout9"
+
+            android:title="SR 9" />
+        <item
+            android:id="@+id/nav_sr_layout10"
+
+            android:title="SR 10" />
+
+
+</menu>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/nav_dr_layout"
+
+            android:title="DR 1" />
+        <item
+            android:id="@+id/nav_dr_layout2"
+
+            android:title="DR 2" />
+        <item
+            android:id="@+id/nav_dr_layout3"
+
+            android:title="DR 3" />
+        <item
+                android:id="@+id/nav_dr_layout4"
+
+                android:title="DR 4" />
+        <item
+                android:id="@+id/nav_dr_layout5"
+
+                android:title="DR 5" />
+        <item
+                android:id="@+id/nav_dr_layout6"
+
+                android:title="DR 6" />
+        <item
+            android:id="@+id/nav_dr_layout7"
+
+            android:title="DR 7" />
+        <item
+            android:id="@+id/nav_dr_layout8"
+
+            android:title="DR 8" />
+        <item
+            android:id="@+id/nav_dr_layout9"
+
+            android:title="DR 9" />
+        <item
+            android:id="@+id/nav_dr_layout10"
+
+            android:title="DR 10" />
+        <item
+            android:id="@+id/nav_dr_layout11"
+
+            android:title="DR 11" />
+        <item
+            android:id="@+id/nav_dr_layout12"
+
+            android:title="DR 12" />
+        <item
+            android:id="@+id/nav_dr_layout13"
+
+            android:title="DR 13" />
+
+</menu>
