@@ -37,8 +37,10 @@
             android:label="@string/title_activity_sr"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AdvSearch" />
-
-        <activity android:name=".AvailSearch"></activity>
+        <activity android:name=".AvailSearch" />
+        <activity android:name=".popout"
+            android:theme="@style/AppTheme.CustomTheme"
+            ></activity>
     </application>
 
 </manifest>

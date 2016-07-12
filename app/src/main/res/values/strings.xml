@@ -38,7 +38,8 @@
         <item>1600</item>
         <item>1700</item>
         <item>1800</item>
-        ></string-array>
+        >
+    </string-array>
     <string name="select_date_day">Select Date</string>
     <string-array name="dates_selection_day">
         <item>1</item>
@@ -74,6 +75,7 @@
         <item>31</item>
     </string-array>
     <string name="select_date_month">Select Month</string>
+    <string name="button_request">Request</string>
     <string-array name="dates_selection_month">
         <item>1</item>
         <item>2</item>
