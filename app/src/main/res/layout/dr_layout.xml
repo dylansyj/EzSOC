@@ -20,7 +20,7 @@
         android:id="@+id/button"
         android:onClick="setDate"
         android:layout_marginTop="53dp"
-        android:text="Set Date"
+        android:text="Date Request"
         android:layout_below="@+id/textView8"
         android:layout_toLeftOf="@+id/editText"
         android:layout_toStartOf="@+id/editText" />
@@ -32,18 +32,9 @@
         android:ems="10"
         android:gravity="center"
         android:id="@+id/editText"
+        android:focusable="false"
         android:layout_alignBottom="@+id/button"
         android:layout_alignLeft="@+id/textView8"
         android:layout_alignStart="@+id/textView8" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_request"
-        android:id="@+id/button5"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
-        android:textColor="#d51919" />
 
 </RelativeLayout>
