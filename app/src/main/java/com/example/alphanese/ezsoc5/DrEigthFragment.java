@@ -43,6 +43,16 @@ public class DrEigthFragment extends Fragment {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getFragmentManager(), "datePicker");
                 new chooseDate().execute();
+                //Five Dates from url is compared with user selected date here
+                for(int i=0 ; i < listOfDates.size() ; i++ ) {
+                    //System.out.println(dateSelected + "test 2");
+                    if (listOfDates.get(i).equals(dateSelected)) {
+                        //Found a match of the date and assign a new url
+                        //From this new url i must get the required timings of the room
+                        String userSelectedUrl = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8&thedate=" + dateSelected;
+                        System.out.println(userSelectedUrl);
+                    }
+                }
             }
         });
         //((TextView) getView().findViewById(R.id.editText)).setText("hi");
