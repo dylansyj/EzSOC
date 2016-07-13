@@ -31,6 +31,7 @@ import java.util.Date;
  */
 
 public class DrFirstFragment extends Fragment {
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,29 +69,29 @@ public class DrFirstFragment extends Fragment {
             //TextView myTextView = (TextView) view.findViewById(R.id.editText);
             String monthName = "Sup bitch";
             if (month == 1) {
-                monthName = "Jan";
+                monthName = "01";
             } else if (month == 2) {
-                monthName = "Feb";
+                monthName = "02";
             } else if (month == 3) {
-                monthName = "Mar";
+                monthName = "03";
             } else if (month == 4) {
-                monthName = "Apr";
+                monthName = "04";
             } else if (month == 5) {
-                monthName = "May";
+                monthName = "05";
             } else if (month == 6) {
-                monthName = "Jun";
+                monthName = "06";
             } else if (month == 7) {
-                monthName = "Jul";
+                monthName = "07";
             } else if (month == 8) {
-                monthName = "Aug";
+                monthName = "08";
             } else if (month == 9) {
-                monthName = "Sep";
+                monthName = "09";
             } else if (month == 10) {
-                monthName = "Oct";
+                monthName = "10";
             } else if (month == 11) {
-                monthName = "Nov";
+                monthName = "11";
             } else if (month == 12) {
-                monthName = "Dec";
+                monthName = "12";
             }
 
             ((TextView) getActivity().findViewById(R.id.editText)).setText(day + " " + monthName + " " + year);
