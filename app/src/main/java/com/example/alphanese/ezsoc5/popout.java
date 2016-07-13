@@ -28,7 +28,7 @@ public class popout extends Activity {
         int day = getIntent().getIntExtra("day",0);
         String month = getIntent().getStringExtra("month");
         String year = getIntent().getStringExtra("year");
-
+        // ArrayList<String> dates = getIntent().get
         ((TextView) findViewById(R.id.textView3)).setText(day + " " + month + " " + year);
         View v = new View(this);
         v.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, 1));

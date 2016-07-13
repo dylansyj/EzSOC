@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,8 +31,13 @@ import java.util.Calendar;
  */
 public class DrEigthFragment extends Fragment {
     static String dateSelected;
-    ArrayList<String> listOfDates = new ArrayList<String>();
-    String url = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8";
+    static ArrayList<String> listOfDates = new ArrayList<String>();
+    static String url = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8";
+    static String userSelectedUrl;
+    static ArrayList <ArrayList<String>> listOfTimings = new ArrayList<>(); // contains a list of the arraylist of timings
+    static ArrayList <String> timings = new ArrayList<String>();            // Arraylist of timings
+    static ArrayList <String> listOfUrls = new ArrayList<String>();         // Contains the list of urls
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,24 +49,58 @@ public class DrEigthFragment extends Fragment {
             public void onClick(View v) {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getFragmentManager(), "datePicker");
-                new chooseDate().execute();
-                //Five Dates from url is compared with user selected date here
-                for(int i=0 ; i < listOfDates.size() ; i++ ) {
-                    //System.out.println(dateSelected + "test 2");
-                    if (listOfDates.get(i).equals(dateSelected)) {
-                        //Found a match of the date and assign a new url
-                        //From this new url i must get the required timings of the room
-                        String userSelectedUrl = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8&thedate=" + dateSelected;
-                        System.out.println(userSelectedUrl);
-                    }
-                }
             }
         });
-        //((TextView) getView().findViewById(R.id.editText)).setText("hi");
         return view;
     }
+    private static class Timings extends AsyncTask<Void, Void, Void> {
+        String test;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            for(int j=0 ; j < listOfUrls.size() ; j++) {
+                try {
+                    String currentUrl = listOfUrls.get(j);
+                    Document document = Jsoup.connect(currentUrl).get();
+                    Elements table = document.select("body > div > form > font > table ");
+                    Elements firstContent = table.select("tbody> tr");
+                    //If bookings are made the timings are extracted and placed into
+                    //an arraylist called timings
+                    if (!firstContent.text().equals("No bookings made.")) {
+                        for (Element content : firstContent) {
+
+                            String first = content.text();
+                            //System.out.println(first) ;
+                           // System.out.println(first.substring(0, 17));
+                            timings.add(first.substring(0, 17));
+                        }
+                        listOfTimings.add(timings);
+                    }
+                    //else arraylist timings contains string of 'No bookings made.'
+                    else {
+                        //System.out.println("Test");
+                        timings.add("No bookings made.");
+                        listOfTimings.add(timings);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+        protected void onPostExecute(Void aVoid) {
+            //Checking for timings
+           // for(int k=0 ; k <listOfTimings.size() ; k ++) {
+            //    System.out.println(listOfTimings.get(k));
+            //}
+
+        }
+    }
     //This class obtains the 5 dates from the url itself
-    private class chooseDate extends AsyncTask<Void, Void, Void> {
+    private static class chooseDate extends AsyncTask<Void, Void, Void> {
         String date1;
         String date2;
         String date3;
@@ -101,6 +142,13 @@ public class DrEigthFragment extends Fragment {
             listOfDates.add(date3);
             listOfDates.add(date4);
             listOfDates.add(date5);
+            //Add all the url into an arraylist called listOfUrls
+            for (int i = 0; i < listOfDates.size(); i++) {
+                System.out.println(listOfDates.get(i));
+                listOfUrls.add("https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8&thedate=" + listOfDates.get(i));
+            }
+            //After i am done obtaining the 5 urls, execute timings()
+            new Timings().execute();
         }
     }
 
@@ -148,15 +196,17 @@ public class DrEigthFragment extends Fragment {
             } else if (month == 12) {
                 monthName = "12";
             }
-
             ((TextView) getActivity().findViewById(R.id.editText)).setText(year + " " + monthName + " " + day);
-            Intent myIntent = new Intent(view.getContext(), popout.class);
             dateSelected = year + "/" + monthName + "/" + day;
-            System.out.println(dateSelected + " test");
+            //Execute the command to get the 5 dates
+            new chooseDate().execute();
+       
+            Intent myIntent = new Intent(view.getContext(), popout.class);
             myIntent.putExtra("day", day);
             myIntent.putExtra("month", monthName);
             myIntent.putExtra("year", Integer.toString(year));
             startActivityForResult(myIntent, 0);
         }
     }
+
 }
