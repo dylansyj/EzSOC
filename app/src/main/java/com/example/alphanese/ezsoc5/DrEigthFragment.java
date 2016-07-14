@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,9 +35,16 @@ public class DrEigthFragment extends Fragment {
     static ArrayList<String> listOfDates = new ArrayList<String>();
     static String url = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8";
     static String userSelectedUrl;
-    static ArrayList <ArrayList<String>> listOfTimings = new ArrayList<>(); // contains a list of the arraylist of timings
-    static ArrayList <String> timings = new ArrayList<String>();            // Arraylist of timings
+    static ArrayList <ArrayList<String>> listOfTimings = new ArrayList<ArrayList<String>>(); // contains a list of the arraylist of timings
+   // static ArrayList <String> timings = new ArrayList<String>();            // Arraylist of timings
     static ArrayList <String> listOfUrls = new ArrayList<String>();         // Contains the list of urls
+    static boolean bufferTimings;
+    ProgressDialog PD;
+    public static int year;
+    public static int month;
+    public static int day;
+    public static int monthName;
+    public static DatePicker view;
 
     @Nullable
     @Override
@@ -49,20 +57,24 @@ public class DrEigthFragment extends Fragment {
             public void onClick(View v) {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getFragmentManager(), "datePicker");
+
             }
         });
         return view;
     }
-    private static class Timings extends AsyncTask<Void, Void, Void> {
+    //This class obtains all available timings
+    private class Timings extends AsyncTask<Void, Void, Void> {
         String test;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
         }
         @Override
         protected Void doInBackground(Void... voids) {
             for(int j=0 ; j < listOfUrls.size() ; j++) {
                 try {
+                    ArrayList<String> timings = new ArrayList<String>();
                     String currentUrl = listOfUrls.get(j);
                     Document document = Jsoup.connect(currentUrl).get();
                     Elements table = document.select("body > div > form > font > table ");
@@ -71,17 +83,13 @@ public class DrEigthFragment extends Fragment {
                     //an arraylist called timings
                     if (!firstContent.text().equals("No bookings made.")) {
                         for (Element content : firstContent) {
-
                             String first = content.text();
-                            //System.out.println(first) ;
-                           // System.out.println(first.substring(0, 17));
                             timings.add(first.substring(0, 17));
                         }
                         listOfTimings.add(timings);
                     }
                     //else arraylist timings contains string of 'No bookings made.'
                     else {
-                        //System.out.println("Test");
                         timings.add("No bookings made.");
                         listOfTimings.add(timings);
                     }
@@ -92,23 +100,45 @@ public class DrEigthFragment extends Fragment {
             return null;
         }
         protected void onPostExecute(Void aVoid) {
-            //Checking for timings
-           // for(int k=0 ; k <listOfTimings.size() ; k ++) {
-            //    System.out.println(listOfTimings.get(k));
-            //}
+            bufferTimings= true;
+            super.onPostExecute(aVoid);
+            PD.dismiss();
+            System.out.println("Testing for Date " + day + " " + monthName + " " + year);
+            /*for(int k=0 ; k < listOfTimings.size(); k ++) {
+                System.out.println( "Current Date is " + listOfDates.get(k) + " and timings for this date is " + listOfTimings.get(k));
+            }*/
+            System.out.println("For Testing day 1 : " + listOfTimings.get(0));
+            System.out.println("For Testing day 2 : " + listOfTimings.get(1));
+            System.out.println("For Testing day 3 : " + listOfTimings.get(2));
+            System.out.println("For Testing day 4 : " + listOfTimings.get(3));
+            System.out.println("For Testing day 5 : " + listOfTimings.get(4));
 
+            //This is where u put in your intent for the listOfTimings to be brought over to popout
+            //Intent is shifted here instead
+            Intent myIntent = new Intent(getActivity(), popout.class);
+            myIntent.putExtra("listOfTimings", listOfTimings);
+            myIntent.putExtra("day", day);
+            myIntent.putExtra("month", monthName);
+            myIntent.putExtra("year", Integer.toString(year));
+            startActivityForResult(myIntent, 0);
         }
     }
     //This class obtains the 5 dates from the url itself
-    private static class chooseDate extends AsyncTask<Void, Void, Void> {
+    private class chooseDate extends AsyncTask<Void, Void, Void> {
         String date1;
         String date2;
         String date3;
         String date4;
         String date5;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            PD = new ProgressDialog(getActivity());
+            PD.setTitle("Please Wait..");
+            PD.setMessage("Loading...");
+            PD.setCancelable(false);
+            PD.show();
         }
         @Override
         protected Void doInBackground(Void... voids) {
@@ -144,23 +174,24 @@ public class DrEigthFragment extends Fragment {
             listOfDates.add(date5);
             //Add all the url into an arraylist called listOfUrls
             for (int i = 0; i < listOfDates.size(); i++) {
-                System.out.println(listOfDates.get(i));
                 listOfUrls.add("https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8&thedate=" + listOfDates.get(i));
             }
             //After i am done obtaining the 5 urls, execute timings()
             new Timings().execute();
+
         }
     }
 
-    public static class DatePickerFragment extends DialogFragment
+    public class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
@@ -198,15 +229,18 @@ public class DrEigthFragment extends Fragment {
             }
             ((TextView) getActivity().findViewById(R.id.editText)).setText(year + " " + monthName + " " + day);
             dateSelected = year + "/" + monthName + "/" + day;
-            //Execute the command to get the 5 dates
             new chooseDate().execute();
-       
+
+            //Ur intent code is shifted to timings.execute() postpone
+            /*
             Intent myIntent = new Intent(view.getContext(), popout.class);
             myIntent.putExtra("day", day);
             myIntent.putExtra("month", monthName);
             myIntent.putExtra("year", Integer.toString(year));
             startActivityForResult(myIntent, 0);
+            */
         }
+
     }
 
 }
