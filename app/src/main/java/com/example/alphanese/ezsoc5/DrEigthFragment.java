@@ -36,14 +36,13 @@ public class DrEigthFragment extends Fragment {
     static String url = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR8";
     static String userSelectedUrl;
     static ArrayList <ArrayList<String>> listOfTimings = new ArrayList<ArrayList<String>>(); // contains a list of the arraylist of timings
-   // static ArrayList <String> timings = new ArrayList<String>();            // Arraylist of timings
     static ArrayList <String> listOfUrls = new ArrayList<String>();         // Contains the list of urls
     static boolean bufferTimings;
     ProgressDialog PD;
     public static int year;
     public static int month;
     public static int day;
-    public static int monthName;
+    public static String monthName;
     public static DatePicker view;
 
     @Nullable
@@ -116,7 +115,9 @@ public class DrEigthFragment extends Fragment {
             //This is where u put in your intent for the listOfTimings to be brought over to popout
             //Intent is shifted here instead
             Intent myIntent = new Intent(getActivity(), popout.class);
+            //For ur convenience
             myIntent.putExtra("listOfTimings", listOfTimings);
+            //myIntent.putExtra("listOfDates", listOfDates);    //If u need
             myIntent.putExtra("day", day);
             myIntent.putExtra("month", monthName);
             myIntent.putExtra("year", Integer.toString(year));
@@ -201,7 +202,7 @@ public class DrEigthFragment extends Fragment {
             month += 1;
             Toast.makeText(getContext(), "Date : " + day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
             //TextView myTextView = (TextView) view.findViewById(R.id.editText);
-            String monthName = "Sup bitch";
+            monthName = "Sup bitch";
             if (month == 1) {
                 monthName = "01";
             } else if (month == 2) {
