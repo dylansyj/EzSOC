@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     ImageButton DRButton;
     ImageButton SRButton;
     ImageButton TRButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(AdvInten);
             }
         });
+
         AvailButton = (Button) findViewById(R.id.AvailButton);
         AvailButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(AvailInten);
             }
         });
+
         DRButton = (ImageButton) findViewById(R.id.DRimage);
         DRButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         SRButton = (ImageButton) findViewById(R.id.SRimage);
         SRButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(SRintent);
             }
         });
+
         TRButton = (ImageButton) findViewById(R.id.TRimage);
         TRButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,5 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(TRintent);
             }
         });
+
     }
 }
