@@ -38,7 +38,7 @@ public class DrSecondFragment extends Fragment {
     public static int month;
     public static int day;
     public static String monthName;
-    ArrayList<String> timings = new ArrayList<String>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,9 +63,9 @@ public class DrSecondFragment extends Fragment {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
@@ -75,7 +75,7 @@ public class DrSecondFragment extends Fragment {
             month += 1;
             Toast.makeText(getContext(), "Date : " + day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
             //TextView myTextView = (TextView) view.findViewById(R.id.editText);
-            String monthName = "Sup bitch";
+            monthName = "Sup bitch";
             if (month == 1) {
                 monthName = "01";
             } else if (month == 2) {
@@ -104,6 +104,7 @@ public class DrSecondFragment extends Fragment {
 
             ((TextView) getActivity().findViewById(R.id.editText)).setText(day + " " + monthName + " " + year);
             dateSelected = year + "/" + monthName + "/" + day;
+            System.out.println("date selected is :" + dateSelected);
             new Timings().execute();
            /* Intent myIntent = new Intent(view.getContext(), popout.class);
             myIntent.putExtra("day", day);
@@ -115,6 +116,7 @@ public class DrSecondFragment extends Fragment {
     //This class obtains all available timings
     private class Timings extends AsyncTask<Void, Void, Void> {
         String test;
+        ArrayList<String> timings = new ArrayList<String>();
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -127,13 +129,13 @@ public class DrSecondFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
                 try {
-
                     String currentUrl = "https://mysoc.nus.edu.sg/~calendar/getBooking.cgi?room=DR2&thedate="+dateSelected;
                     Document document = Jsoup.connect(currentUrl).get();
                     Elements table = document.select("body > div > form > font > table ");
                     Elements firstContent = table.select("tbody> tr");
                     //If bookings are made the timings are extracted and placed into
                     //an arraylist called timings
+                    System.out.println("at fragment class:" +firstContent.text());
                     if (!firstContent.text().equals("No bookings made.")) {
                         for (Element content : firstContent) {
                             String first = content.text();
@@ -162,6 +164,7 @@ public class DrSecondFragment extends Fragment {
             Intent myIntent = new Intent(getActivity(), popout.class);
             //For ur convenience
             //myIntent.putExtra("listOfDates", listOfDates);    //If u need
+            System.out.println("at fragment class: "+ timings.get(0));
             myIntent.putExtra("day", day);
             myIntent.putExtra("month", monthName);
             myIntent.putExtra("year", Integer.toString(year));
