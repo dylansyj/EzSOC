@@ -2,14 +2,21 @@ package com.example.alphanese.ezsoc5;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class popout extends Activity {
     Button backButton;
@@ -25,52 +32,50 @@ public class popout extends Activity {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int) (width * .8), (int) (height * .8));
-        int day = getIntent().getIntExtra("day",0);
+        int day = getIntent().getIntExtra("day", 0);
         String month = getIntent().getStringExtra("month");
         String year = getIntent().getStringExtra("year");
         // ArrayList<String> dates = getIntent().get
         ((TextView) findViewById(R.id.textView3)).setText(day + " " + month + " " + year);
-        View v = new View(this);
-        v.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, 1));
-        TableRow row;
-        row = (TableRow) findViewById(R.id.tableRow1);
-        row.addView(v);
+        int count = 0;
+        ArrayList<RoomData> arrayList = new ArrayList<>();
+        //insert extraction of data here
+        //if extracting of data uses a while loop, just keep adding the data into the
+        /*while( there's data){
+        String str = entire string
+        int len = str.length(); (determines the ending of the string, to be used to extract info)
+        String time = str.substring(0,8);
+        String info = str.substring(8,len);
+        RoomData data1 = new RoomData(time, info);
+        arrayList.add(data1);
+        count++;
+        }*/
 
-        //below requires availability string to be determined by data extracted
-        // remove comments indication below after creation of strings as stated on the abv comment
-        /*((EditText) findViewById(R.id.availText01)).setText(availability0); //availability1 indicated by data from server, available or unavailable
-        ((EditText) findViewById(R.id.availText)).setText(availability1);
-        ((EditText) findViewById(R.id.availText2)).setText(availability2);
-        ((EditText) findViewById(R.id.availText3)).setText(availability3);
-        ((EditText) findViewById(R.id.availText4)).setText(availability4);
-        ((EditText) findViewById(R.id.availText5)).setText(availability5);
-        ((EditText) findViewById(R.id.availText6)).setText(availability6);
-        ((EditText) findViewById(R.id.availText7)).setText(availability7);
-        ((EditText) findViewById(R.id.availText8)).setText(availability8);
-        ((EditText) findViewById(R.id.availText9)).setText(availability9);
-        ((EditText) findViewById(R.id.availText10)).setText(availability10);
-        ((EditText) findViewById(R.id.availText11)).setText(availability11);
-        ((EditText) findViewById(R.id.availText12)).setText(availability12);
-        ((EditText) findViewById(R.id.availText13)).setText(availability13);
-        */
-
-        backButton = (Button) findViewById(R.id.button5);
-        backButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent nextDate = new Intent(view.getContext(), popout.class);
-                nextDate.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(nextDate,1);
-            }
-        });
-        forwardButton = (Button) findViewById(R.id.button6);
-        forwardButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent nextDate = new Intent(view.getContext(), popout.class);
-                nextDate.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivityForResult(nextDate,1);
-            }
-        });
+        TableLayout stk = (TableLayout) findViewById(R.id.display);
+        TableRow tbrow0 = new TableRow(this);
+        TextView tv0 = new TextView(this);
+        tv0.setText(" Time ");
+        tv0.setTextColor(Color.WHITE);
+        tbrow0.addView(tv0);
+        TextView tv1 = new TextView(this);
+        tv1.setText(" Occupied ");
+        tv1.setTextColor(Color.WHITE);
+        tbrow0.addView(tv1);
+        stk.addView(tbrow0);
+        //count determines the number of rows
+        for (int i = 0; i < count; i++) {
+            TableRow tbrow = new TableRow(this);
+            TextView t1v = new TextView(this);
+            t1v.setText(arrayList.get(i).getTime());
+            t1v.setTextColor(Color.WHITE);
+            t1v.setGravity(Gravity.CENTER);
+            tbrow.addView(t1v);
+            TextView t2v = new TextView(this);
+            t2v.setText(arrayList.get(i).getInfo());
+            t2v.setTextColor(Color.WHITE);
+            t2v.setGravity(Gravity.CENTER);
+            tbrow.addView(t2v);
+            stk.addView(tbrow);
+        }
     }
 }

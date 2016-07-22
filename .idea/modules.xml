@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EzSOC.iml" filepath="$PROJECT_DIR$/EzSOC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EzSoc5.iml" filepath="$PROJECT_DIR$/EzSoc5.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
