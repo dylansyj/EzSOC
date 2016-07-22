@@ -45,12 +45,6 @@ public class SrFirstFragment extends Fragment {
     String defaultUrl1 = "http://wrbtf.nus.edu.sg:8000/reporting/master?objectclass=location&idtype=id&identifier=39/" +
             "COM1-0206&t=SWSCUST+location+master&days=1-7&weeks=";
     String defaultUrl2="&periods=1-34&template=SWSCUST+location+master";
-   /* String defaultUrl2= "http://wrbtf.nus.edu.sg:8000/reporting/master?objectclass=location&idtype=id&identifier=39/" +
-            "COM1-0206&t=SWSCUST+location+master&days=1-7&weeks=2&periods=1-34&template=SWSCUST+location+master";
-    String getDefaultUrl3 = "http://wrbtf.nus.edu.sg:8000/reporting/master?objectclass=location&idtype=id&identifier=39/" +
-            "COM1-0206&t=SWSCUST+location+master&days=1-7&weeks=8&periods=1-34&template=SWSCUST+location+master";
-    String getDefaultUrl4 = "http://wrbtf.nus.edu.sg:8000/reporting/master?objectclass=location&idtype=id&identifier=39/" +
-            "COM1-0206&t=SWSCUST+location+master&days=1-7&weeks=9&periods=1-34&template=SWSCUST+location+master";*/
     static Date userSelectedDate = new Date();
     static DateFormat ft = new SimpleDateFormat("yyyy/MM/dd");
     ArrayList<String> monday = new ArrayList<String>();
@@ -62,7 +56,12 @@ public class SrFirstFragment extends Fragment {
     ArrayList<String>  sunday = new ArrayList<String>();
     ArrayList<ArrayList<String>> week = new ArrayList<ArrayList<String>>();
     ArrayList<String> timings = new ArrayList<>();
-
+    public static int year;
+    public static int month;
+    public static int day;
+    public static String monthName;
+    Calendar theDate = Calendar.getInstance();
+    int dayOfWeek;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -161,17 +160,16 @@ public class SrFirstFragment extends Fragment {
             }
 
             ((TextView) getActivity().findViewById(R.id.editText)).setText(day + " " + monthName + " " + year);
-            Intent myIntent = new Intent(view.getContext(), popout.class);
             String selectedDate = year + "/" + monthName + "/" + day;
+
             try {
                 userSelectedDate = ft.parse(selectedDate) ;
+                theDate.setTime(userSelectedDate);
+                dayOfWeek= theDate.get(Calendar.DAY_OF_WEEK);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            /*System.out.println("userSelectedDate is:" + ft.format(userSelectedDate));
-            if(userSelectedDate instanceof  Date) {
-                System.out.println("userSelectedDate is:" + userSelectedDate);
-            }*/
+            System.out.println("numeric value of day of week is :" + dayOfWeek);
             //Do not erase the following: yyyy , mm , dd
             //              After               Before
             //First week: 2016, 07, 31      2016, 08, 08
@@ -220,18 +218,6 @@ public class SrFirstFragment extends Fragment {
             System.out.println(afterI.getTime());
             System.out.println(chosenDate.getTime());
             //System.out.println(chosenDate);
-            if(!chosenDate.after(afterI)) {
-                System.out.println("Chosen Date is not after preset Date");
-            }
-            if(!chosenDate.before(beforeI)) {
-                System.out.println("ChosenDate is not before preset Date");
-            }
-            if(chosenDate.before(beforeI)) {
-                System.out.println("ChosenDate is before preset date");
-            }
-            if(chosenDate.after(afterI)) {
-                System.out.println("ChosenDate is after preset date");
-            }
             while(chosenDate.after(afterI)) {
                 if(chosenDate.before(beforeI)) {
                     periodValue++;
@@ -246,12 +232,8 @@ public class SrFirstFragment extends Fragment {
             System.out.println("periodValue is :" + periodValue);
             periodString = Integer.toString(periodValue);
             new Testing().execute();
-            /*
-            myIntent.putExtra("day", day);
-            myIntent.putExtra("month", monthName);
-            myIntent.putExtra("year", Integer.toString(year));
-            startActivityForResult(myIntent, 0);
-            */
+
+
         }
     }
     private class Testing extends AsyncTask<Void, Void, Void> {
@@ -1209,6 +1191,37 @@ public class SrFirstFragment extends Fragment {
             System.out.println("Friday: " + week.get(4));
             System.out.println("Saturday: " + week.get(5));
             System.out.println("Sunday: " + week.get(6));
+
+            Intent myIntent = new Intent(getActivity(), popout.class);
+           // System.out.println()
+            //dayOfWeek, sunday is 1, monday is 2 and so on till saturday is 7
+            if(dayOfWeek==1) { //sunday
+                myIntent.putExtra("timings", week.get(6));
+            }
+            else if(dayOfWeek==2) { //monday
+                myIntent.putExtra("timings", week.get(0));
+            }
+            else if (dayOfWeek==3){
+                myIntent.putExtra("timings", week.get(1));
+            }
+            else if(dayOfWeek==4) {
+                myIntent.putExtra("timings", week.get(2));
+            }
+            else if(dayOfWeek==5) {
+                myIntent.putExtra("timings", week.get(3));
+            }
+            else if(dayOfWeek==6) {
+                myIntent.putExtra("timings", week.get(4));
+            }
+            else if(dayOfWeek==7) {
+                myIntent.putExtra("timings", week.get(5));
+            }
+
+            myIntent.putExtra("day", day);
+            myIntent.putExtra("month", monthName);
+            myIntent.putExtra("year", Integer.toString(year));
+            startActivityForResult(myIntent, 0);
+
         }
     }
 }
