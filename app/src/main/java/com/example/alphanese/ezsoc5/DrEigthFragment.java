@@ -37,7 +37,6 @@ public class DrEigthFragment extends Fragment {
     static String userSelectedUrl;
     static ArrayList <ArrayList<String>> listOfTimings = new ArrayList<ArrayList<String>>(); // contains a list of the arraylist of timings
     static ArrayList <String> listOfUrls = new ArrayList<String>();         // Contains the list of urls
-    static boolean bufferTimings;
     ProgressDialog PD;
     public static int year;
     public static int month;
@@ -99,7 +98,6 @@ public class DrEigthFragment extends Fragment {
             return null;
         }
         protected void onPostExecute(Void aVoid) {
-            bufferTimings= true;
             super.onPostExecute(aVoid);
             PD.dismiss();
             System.out.println("Testing for Date " + day + " " + monthName + " " + year);

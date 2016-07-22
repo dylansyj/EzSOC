@@ -35,8 +35,9 @@ public class popout extends Activity {
         int day = getIntent().getIntExtra("day", 0);
         String month = getIntent().getStringExtra("month");
         String year = getIntent().getStringExtra("year");
+        ArrayList<String> timings = getIntent()
         // ArrayList<String> dates = getIntent().get
-       // ((TextView) findViewById(R.id.textView3)).setText(day + " " + month + " " + year);
+        ((TextView) findViewById(R.id.textView3)).setText(day + " " + month + " " + year);
         int count = 0;
         ArrayList<RoomData> arrayList = new ArrayList<>();
         //insert extraction of data here
@@ -50,7 +51,6 @@ public class popout extends Activity {
         arrayList.add(data1);
         count++;
         }*/
-
         TableLayout stk = (TableLayout) findViewById(R.id.display);
         TableRow tbrow0 = new TableRow(this);
         TextView tv0 = new TextView(this);
