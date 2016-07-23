@@ -1191,7 +1191,6 @@ public class SrFirstFragment extends Fragment {
             System.out.println("Friday: " + week.get(4));
             System.out.println("Saturday: " + week.get(5));
             System.out.println("Sunday: " + week.get(6));
-
             Intent myIntent = new Intent(getActivity(), popout.class);
            // System.out.println()
             //dayOfWeek, sunday is 1, monday is 2 and so on till saturday is 7

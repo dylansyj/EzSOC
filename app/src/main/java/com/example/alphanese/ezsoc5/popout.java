@@ -36,7 +36,19 @@ public class popout extends Activity {
         tl.setColumnStretchable(0, true);
         tl.setColumnStretchable(1, true);
         ArrayList<String> timings = getIntent().getStringArrayListExtra("timings");
-        if(timings.get(0).equals("No bookings made.")){
+        if (timings.size() == 0){
+            tr = new TableRow(this);
+            timeOfDay = new TextView(this);
+            available = new TextView(this);
+            timeOfDay.setText("-");
+            available.setText("No bookings made for the day");
+            timeOfDay.setGravity(Gravity.CENTER);
+            available.setGravity(Gravity.CENTER);
+            tr.addView(timeOfDay);
+            tr.addView(available);
+            tl.addView(tr);
+        }
+        else if(timings.get(0).equals("No bookings made.")){
             tr = new TableRow(this);
             timeOfDay = new TextView(this);
             available = new TextView(this);
