@@ -71,10 +71,13 @@ public class DrSecondFragment extends Fragment {
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
-        public void onDateSet(DatePicker view, int year, int month, int day) {
+        public void onDateSet(DatePicker view, int year1, int month1, int day1) {
             month += 1;
             Toast.makeText(getContext(), "Date : " + day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
             //TextView myTextView = (TextView) view.findViewById(R.id.editText);
+            day = day1;
+            month = month1;
+            year = year1;
             monthName = "Sup bitch";
             if (month == 1) {
                 monthName = "01";
