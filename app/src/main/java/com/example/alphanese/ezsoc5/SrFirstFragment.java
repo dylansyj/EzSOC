@@ -232,8 +232,6 @@ public class SrFirstFragment extends Fragment {
             System.out.println("periodValue is :" + periodValue);
             periodString = Integer.toString(periodValue);
             new Testing().execute();
-
-
         }
     }
     private class Testing extends AsyncTask<Void, Void, Void> {
@@ -258,6 +256,8 @@ public class SrFirstFragment extends Fragment {
                 Elements second = document.select("body > table:nth-child(2) > tbody > tr");
 
                 Elements testing = second.select("td");
+                monday.clear(); tuesday.clear(); wednesday.clear(); thursday.clear(); friday.clear();
+                saturday.clear(); sunday.clear();
                 week.add(monday);
                 week.add(tuesday);
                 week.add(wednesday);
