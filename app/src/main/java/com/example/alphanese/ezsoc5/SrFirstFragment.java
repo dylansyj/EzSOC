@@ -56,10 +56,10 @@ public class SrFirstFragment extends Fragment {
     ArrayList<String>  sunday = new ArrayList<String>();
     ArrayList<ArrayList<String>> week = new ArrayList<ArrayList<String>>();
     ArrayList<String> timings = new ArrayList<>();
-    public static int year;
-    public static int month;
-    public static int day;
-    public static String monthName;
+    public static int globalYear;
+    public static int globalMonth;
+    public static int globalDay;
+    public static String globalMonthName;
     Calendar theDate = Calendar.getInstance();
     int dayOfWeek;
     @Override
@@ -158,10 +158,10 @@ public class SrFirstFragment extends Fragment {
             } else if (month == 12) {
                 monthName = "12";
             }
-
+            globalDay = day; globalMonthName = monthName; globalYear = year;
             ((TextView) getActivity().findViewById(R.id.editText)).setText(day + " " + monthName + " " + year);
             String selectedDate = year + "/" + monthName + "/" + day;
-
+            System.out.println("selectedDate is:" + selectedDate);
             try {
                 userSelectedDate = ft.parse(selectedDate) ;
                 theDate.setTime(userSelectedDate);
@@ -1216,10 +1216,10 @@ public class SrFirstFragment extends Fragment {
             else if(dayOfWeek==7) {
                 myIntent.putExtra("timings", week.get(5));
             }
-
-            myIntent.putExtra("day", day);
-            myIntent.putExtra("month", monthName);
-            myIntent.putExtra("year", Integer.toString(year));
+            System.out.println("Dates are: " + globalDay + " " + globalMonthName + " " + globalYear);
+            myIntent.putExtra("day", globalDay);
+            myIntent.putExtra("month", globalMonthName);
+            myIntent.putExtra("year", Integer.toString(globalYear));
             startActivityForResult(myIntent, 0);
 
         }

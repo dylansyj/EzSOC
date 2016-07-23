@@ -63,49 +63,45 @@ public class DrThirdFragment extends Fragment {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
-            year = c.get(Calendar.YEAR);
-            month = c.get(Calendar.MONTH);
-            day = c.get(Calendar.DAY_OF_MONTH);
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
 
             // Create a new instance of DatePickerDialog and return it
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
-        public void onDateSet(DatePicker view, int year1, int month1, int day1) {
-            month1 += 1;
-            month = month1;
-            year = year1;
-            day = day1;
-            Toast.makeText(getContext(), "Date : " + day + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+        public void onDateSet(DatePicker view, int Year, int Month, int Day) {
+            Month += 1;
+            Toast.makeText(getContext(), "Date : " + Day + "/" + Month + "/" + Year, Toast.LENGTH_LONG).show();
             //TextView myTextView = (TextView) view.findViewById(R.id.editText);
-
             monthName = "Sup bitch";
-            if (month == 1) {
+            if (Month == 1) {
                 monthName = "01";
-            } else if (month == 2) {
+            } else if (Month == 2) {
                 monthName = "02";
-            } else if (month == 3) {
+            } else if (Month == 3) {
                 monthName = "03";
-            } else if (month == 4) {
+            } else if (Month == 4) {
                 monthName = "04";
-            } else if (month == 5) {
+            } else if (Month == 5) {
                 monthName = "05";
-            } else if (month == 6) {
+            } else if (Month == 6) {
                 monthName = "06";
-            } else if (month == 7) {
+            } else if (Month == 7) {
                 monthName = "07";
-            } else if (month == 8) {
+            } else if (Month == 8) {
                 monthName = "08";
-            } else if (month == 9) {
+            } else if (Month == 9) {
                 monthName = "09";
-            } else if (month == 10) {
+            } else if (Month == 10) {
                 monthName = "10";
-            } else if (month == 11) {
+            } else if (Month == 11) {
                 monthName = "11";
-            } else if (month == 12) {
+            } else if (Month == 12) {
                 monthName = "12";
             }
-
+            day = Day;  year = Year;
             ((TextView) getActivity().findViewById(R.id.editText)).setText(day + " " + monthName + " " + year);
             dateSelected = year + "/" + monthName + "/" + day;
             System.out.println("date selected is :" + dateSelected);
